@@ -9,7 +9,7 @@
 // 3. Save the file and refresh your browser. Done!
 // ============================================================
 
-var DOOFINDER_SCRIPT_URL = ""; // <- PASTE YOUR URL HERE
+var DOOFINDER_SCRIPT_URL = "https://eu1-config.doofinder.com/2.x/xxxx-xxx-xxxx-xxxx-xxxxxxxx.js"; // <- PASTE YOUR URL HERE
 
 // Do not edit below this line
 if (DOOFINDER_SCRIPT_URL) {
