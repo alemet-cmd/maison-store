@@ -1,14 +1,20 @@
 // ============================================================
 // DOOFINDER CONFIGURATION
 // ============================================================
-// Paste your Doofinder script between the markers below.
-// Save the file and refresh your browser. That's it.
-// This file loads on every page automatically.
+// 1. Copy your Doofinder script src URL
+//    It looks like: https://eu1-config.doofinder.com/2.x/YOUR-KEY.js
+//
+// 2. Paste ONLY the URL between the quotes below (replace the empty string)
+//
+// 3. Save the file and refresh your browser. Done!
 // ============================================================
 
-// PASTE YOUR DOOFINDER SCRIPT BELOW THIS LINE
+var DOOFINDER_SCRIPT_URL = ""; // <- PASTE YOUR URL HERE
 
-
-// PASTE YOUR DOOFINDER SCRIPT ABOVE THIS LINE
-
-// ============================================================
+// Do not edit below this line
+if (DOOFINDER_SCRIPT_URL) {
+  var df = document.createElement('script');
+  df.src = DOOFINDER_SCRIPT_URL;
+  df.async = true;
+  document.head.appendChild(df);
+}
