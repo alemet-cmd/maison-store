@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Men — MAISON</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================
+       DOOFINDER SCRIPT — PASTE YOUR DOOFINDER SCRIPT BELOW
+       ============================================================ -->
+
+  <!-- ============================================================
+       END OF DOOFINDER SCRIPT
+       ============================================================ -->
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ['Cormorant Garamond','serif'], body: ['DM Sans','sans-serif'] },
+          colors: { cream: '#FAF8F5', charcoal: '#1C1C1C', mink: '#9E8E82', blush: '#E8D5C4' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1C1C1C; }
+    /* Cart sidebar */
+    #cart-sidebar { position:fixed; top:0; right:0; height:100%; width:380px; max-width:95vw; background:#fff; z-index:50; transform:translateX(100%); transition:transform .35s ease; box-shadow:-4px 0 30px rgba(0,0,0,.08); display:flex; flex-direction:column; }
+    #cart-sidebar.cart-open { transform:translateX(0); }
+    #cart-overlay { position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:49; opacity:0; pointer-events:none; transition:opacity .35s; }
+    #cart-overlay.overlay-show { opacity:1; pointer-events:all; }
+    /* Notification */
+    #notif { position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%) translateY(.25rem); background:#1C1C1C; color:#FAF8F5; font-size:.75rem; letter-spacing:.05em; padding:.5rem 1.25rem; z-index:60; opacity:0; transition:opacity .3s, transform .3s; white-space:nowrap; pointer-events:none; }
+    #notif.opacity-100 { opacity:1; transform:translateX(-50%) translateY(0); }
+    /* Animations */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fadeUp .5s ease both; }
+    .product-card { animation: fadeUp .5s ease both; }
+    .product-card:nth-child(2) { animation-delay:.07s; }
+    .product-card:nth-child(3) { animation-delay:.14s; }
+    .product-card:nth-child(4) { animation-delay:.21s; }
+    .product-card:nth-child(5) { animation-delay:.28s; }
+    .product-card:nth-child(6) { animation-delay:.35s; }
+    .product-card:nth-child(7) { animation-delay:.42s; }
+    .product-card:nth-child(8) { animation-delay:.49s; }
+  </style>
+</head>
+<body class="bg-cream font-body text-charcoal">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-charcoal text-cream">
+    <div class="text-center text-xs py-2 tracking-widest uppercase border-b border-gray-700" role="status">
+      Free shipping on orders over €150 &nbsp;·&nbsp; New arrivals every week
+    </div>
+    <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto" aria-label="Main navigation">
+      <a href="/" class="text-2xl tracking-[.3em] uppercase" style="font-family:'Cormorant Garamond',serif;font-weight:300">Maison</a>
+      <ul class="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase">
+        <li><a href="/category/women.html"      class="hover:text-blush transition-colors">Women</a></li>
+        <li><a href="/category/men.html"        class="hover:text-blush transition-colors">Men</a></li>
+        <li><a href="/category/accessories.html" class="hover:text-blush transition-colors">Accessories</a></li>
+        <li><a href="/category/shoes.html"      class="hover:text-blush transition-colors">Shoes</a></li>
+        <li><a href="/category/sale.html"       class="hover:text-blush transition-colors" style="color:#e07070">Sale</a></li>
+      </ul>
+      <div class="flex items-center gap-5">
+        <input type="search" id="doofinder-search" name="q" placeholder="Search..." autocomplete="off" aria-label="Search products" class="bg-transparent border-b border-gray-500 text-cream placeholder-gray-400 text-xs tracking-wider px-2 py-1 w-40 focus:outline-none focus:border-cream focus:w-56 transition-all duration-300" />
+        <button onclick="openCart()" class="relative hover:text-blush transition-colors" aria-label="Open shopping bag">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span class="cart-count hidden absolute -top-2 -right-2 w-4 h-4 rounded-full bg-blush text-charcoal text-xs flex items-center justify-center" aria-live="polite">0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- BREADCRUMB -->
+    <nav class="max-w-7xl mx-auto px-6 py-4 text-xs text-mink" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-charcoal">Home</a>
+      <span class="mx-2">/</span>
+      <span class="text-charcoal">Men</span>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section class="max-w-7xl mx-auto px-6 mb-10 fade-up">
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300">Men</h1>
+      <p class="text-sm text-mink mt-2 max-w-lg">Refined essentials and sharp tailoring for the modern man.</p>
+    </section>
+
+    <!-- PRODUCT GRID -->
+    <section class="max-w-7xl mx-auto px-6 pb-20" aria-label="Men's products">
+      <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-12"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-charcoal text-cream mt-20">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <nav aria-label="Shop links">
+        <p class="text-xs tracking-widest uppercase mb-4 text-mink">Shop</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/category/women.html"       class="hover:text-blush transition-colors">Women</a></li>
+          <li><a href="/category/men.html"         class="hover:text-blush transition-colors">Men</a></li>
+          <li><a href="/category/accessories.html" class="hover:text-blush transition-colors">Accessories</a></li>
+          <li><a href="/category/shoes.html"       class="hover:text-blush transition-colors">Shoes</a></li>
+          <li><a href="/category/sale.html"        class="hover:text-blush transition-colors" style="color:#e07070">Sale</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Help links">
+        <p class="text-xs tracking-widest uppercase mb-4 text-mink">Help</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-blush transition-colors">Shipping & Returns</a></li>
+          <li><a href="#" class="hover:text-blush transition-colors">Size Guide</a></li>
+          <li><a href="#" class="hover:text-blush transition-colors">FAQ</a></li>
+          <li><a href="#" class="hover:text-blush transition-colors">Contact Us</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="About links">
+        <p class="text-xs tracking-widest uppercase mb-4 text-mink">About</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-blush transition-colors">Our Story</a></li>
+          <li><a href="#" class="hover:text-blush transition-colors">Sustainability</a></li>
+          <li><a href="#" class="hover:text-blush transition-colors">Press</a></li>
+          <li><a href="#" class="hover:text-blush transition-colors">Careers</a></li>
+        </ul>
+      </nav>
+      <section aria-label="Newsletter signup">
+        <p class="text-xs tracking-widest uppercase mb-4 text-mink">Newsletter</p>
+        <p class="text-sm text-mink mb-3">New arrivals, editorials, and exclusive offers.</p>
+        <form class="flex border border-gray-600">
+          <input type="email" placeholder="Your email" aria-label="Email address" class="flex-1 bg-transparent text-xs px-3 py-2 text-cream placeholder-gray-500 outline-none" />
+          <button type="submit" class="px-3 py-2 bg-cream text-charcoal text-xs tracking-widest uppercase hover:bg-blush transition-colors">OK</button>
+        </form>
+      </section>
+    </div>
+    <div class="border-t border-gray-800 text-center text-xs text-gray-500 py-4">
+      © 2025 MAISON. Demo store for internal use only.
+    </div>
+  </footer>
+  <!-- CART OVERLAY -->
+  <div id="cart-overlay" onclick="closeCart()"></div>
+
+  <!-- CART SIDEBAR -->
+  <aside id="cart-sidebar" aria-label="Shopping bag">
+    <div class="flex items-center justify-between px-5 py-4 border-b">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;letter-spacing:.1em">YOUR BAG</h2>
+      <button onclick="closeCart()" class="text-2xl leading-none text-mink hover:text-charcoal" aria-label="Close shopping bag">×</button>
+    </div>
+    <div id="cart-body" class="flex-1 overflow-y-auto px-5"></div>
+    <div class="border-t px-5 py-5 space-y-4">
+      <div class="flex justify-between text-sm">
+        <span class="tracking-widest uppercase text-xs">Total</span>
+        <span id="cart-total" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem">€0.00</span>
+      </div>
+      <button class="w-full py-3 bg-charcoal text-cream text-xs tracking-widest uppercase hover:bg-gray-800 transition-colors">
+        Checkout
+      </button>
+      <button onclick="closeCart()" class="w-full py-2 text-xs tracking-widest uppercase underline text-mink hover:text-charcoal">
+        Continue Shopping
+      </button>
+    </div>
+  </aside>
+
+  <!-- ADD TO CART NOTIFICATION -->
+  <div id="notif" role="alert"></div>
+  <script src="/js/store.js"></script>
+
+  <script>
+    const items = PRODUCTS.filter(p => p.slug === "men");
+    document.getElementById('product-grid').innerHTML = items.map(productCard).join('');
+  </script>
+</body>
+</html>
