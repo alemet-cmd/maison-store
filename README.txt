@@ -10,67 +10,81 @@ your laptop. Use it to test Doofinder installation, script
 injection, CSS customisation, and category behaviour.
 
 ----------------------------------------------------------------
-STEP 1 — MAKE THE LAUNCHER EXECUTABLE (first time only)
+GETTING STARTED — MAC
 ----------------------------------------------------------------
 
-1. Right-click on START_STORE.sh
-2. Select "Properties"
-3. Go to the "Permissions" tab
-4. Check the box: "Allow executing file as program"
-5. Close the window
+STEP 1 — Make the launcher executable (first time only)
+Open Terminal and run:
+  chmod +x /path/to/maison-store/START_STORE_MAC.sh
+Replace /path/to/maison-store with the actual folder location.
 
-Alternatively, open a terminal and run:
-   chmod +x START_STORE.sh
+STEP 2 — Start the store
+Double-click START_STORE_MAC.sh
+Your browser will open automatically at: http://localhost:8080
 
-You only need to do this ONCE.
+To stop the store: close the Terminal window that opened.
 
 ----------------------------------------------------------------
-STEP 2 — START THE STORE
+GETTING STARTED — LINUX
 ----------------------------------------------------------------
 
+STEP 1 — Make the launcher executable (first time only)
+Right-click START_STORE.sh → Properties → Permissions tab
+→ tick "Allow executing file as program"
+
+STEP 2 — Start the store
 Double-click START_STORE.sh
+Your browser will open automatically at: http://localhost:8080
 
-Your browser will open automatically at:
-   http://localhost:8080
-
-That's it. The store is running.
-
-To stop it: close the terminal window that opened.
+To stop the store: close the Terminal window that opened.
 
 ----------------------------------------------------------------
-STEP 3 — INJECT YOUR DOOFINDER SCRIPT
+HOW TO INJECT YOUR DOOFINDER SCRIPT
 ----------------------------------------------------------------
 
-Each page has a clearly marked placeholder where you paste
-your Doofinder script. Open the file in any text editor
-(Mousepad, Gedit, VS Code, etc.) and look for:
+1. Open js/doofinder.js in any text editor
 
-  <!-- DOOFINDER SCRIPT — PASTE YOUR DOOFINDER SCRIPT BELOW -->
+2. Find this line:
+   var DOOFINDER_SCRIPT_URL = "";
 
-Paste your script there, save the file, and refresh your browser.
+3. Paste ONLY the URL from your Doofinder script between the quotes.
+   Your Doofinder script looks like this:
+   <script src="https://eu1-config.doofinder.com/2.x/YOUR-KEY.js" async></script>
 
-Files to edit (one per page):
-  • index.html               → Homepage
-  • category/women.html      → /category/women
-  • category/men.html        → /category/men
-  • category/accessories.html→ /category/accessories
-  • category/shoes.html      → /category/shoes
-  • category/sale.html       → /category/sale
-  • product/detail.html      → Any product detail page
+   Copy only the URL part:
+   https://eu1-config.doofinder.com/2.x/YOUR-KEY.js
 
-TIP: To inject on ALL pages at once, use Find & Replace in
-     your text editor across the whole folder.
+   So the line should look like:
+   var DOOFINDER_SCRIPT_URL = "https://eu1-config.doofinder.com/2.x/YOUR-KEY.js";
+
+4. Save the file and refresh your browser.
+   The script now loads automatically on every page.
+
+----------------------------------------------------------------
+HOW TO UPLOAD THE PRODUCT FEED TO DOOFINDER
+----------------------------------------------------------------
+
+1. Log in to your Doofinder Admin Panel at https://admin.doofinder.com
+2. Go to your Search Engine → Data Sources
+3. Upload the file: DOOFINDER_FEED.csv (located in the root folder)
+4. Start indexing
+
+The feed contains 798 products with id, title, description,
+price, category, image, availability, color, size and gender.
 
 ----------------------------------------------------------------
 STORE STRUCTURE
 ----------------------------------------------------------------
 
 maison-store/
-├── START_STORE.sh          ← Start here
+├── START_STORE_MAC.sh      ← Mac: double-click to launch
+├── START_STORE.sh          ← Linux: double-click to launch
+├── DOOFINDER_FEED.csv      ← Upload to Doofinder admin
 ├── README.txt              ← This file
-├── index.html              ← Homepage
 ├── js/
-│   └── store.js            ← Product data + cart logic
+│   ├── doofinder.js        ← Paste your Doofinder URL here
+│   └── store.js            ← All 798 products
+├── index.html              ← Homepage
 ├── category/
 │   ├── women.html          → http://localhost:8080/category/women.html
 │   ├── men.html            → http://localhost:8080/category/men.html
@@ -85,15 +99,16 @@ TROUBLESHOOTING
 ----------------------------------------------------------------
 
 "Browser doesn't open automatically"
-  → Manually open your browser and go to http://localhost:8080
+  → Open your browser manually and go to http://localhost:8080
 
 "Port already in use" error
-  → Another server is running. Either close it, or change the
-    PORT=8080 line in START_STORE.sh to another number (e.g. 8081)
-    and visit http://localhost:8081 instead.
+  → Run this in Terminal: kill $(lsof -t -i:8080)
+  → Then double-click the launcher again
 
-"Store doesn't load"
-  → Make sure START_STORE.sh is still running in the terminal.
+"Doofinder script not loading"
+  → Make sure you pasted ONLY the URL (no <script> tags)
+  → Make sure you saved the file after editing
+  → Hard refresh the browser: Cmd+Shift+R (Mac) or Ctrl+Shift+R (Linux)
 
 ----------------------------------------------------------------
   Questions? Contact your Doofinder technical team.
