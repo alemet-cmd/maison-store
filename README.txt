@@ -9,14 +9,18 @@ A fully functional fashion demo store you can run locally on
 your laptop. Use it to test Doofinder installation, script
 injection, CSS customisation, and category behaviour.
 
+NOTE: When you download the ZIP from GitHub, the folder will be
+named "maison-store-main". This is normal. Just unzip and use it
+as described below.
+
 ----------------------------------------------------------------
 GETTING STARTED — MAC
 ----------------------------------------------------------------
 
 STEP 1 — Make the launcher executable (first time only)
 Open Terminal and run:
-  chmod +x /path/to/maison-store/START_STORE_MAC.sh
-Replace /path/to/maison-store with the actual folder location.
+  chmod +x /path/to/maison-store-main/START_STORE_MAC.sh
+Replace /path/to/maison-store-main with the actual folder path.
 
 STEP 2 — Start the store
 Double-click START_STORE_MAC.sh
@@ -45,19 +49,15 @@ HOW TO INJECT YOUR DOOFINDER SCRIPT
 1. Open js/doofinder.js in any text editor
 
 2. Find this line:
-   var DOOFINDER_SCRIPT_URL = "";
+   var DOOFINDER_STORE_ID = "";
 
-3. Paste ONLY the URL from your Doofinder script between the quotes.
-   Your Doofinder script looks like this:
-   <script src="https://eu1-config.doofinder.com/2.x/YOUR-KEY.js" async></script>
+3. Go to your Doofinder Admin Panel and copy your Store ID.
+   It looks like: 76670189-511f-4a57-b019-73834825ff75
 
-   Copy only the URL part:
-   https://eu1-config.doofinder.com/2.x/YOUR-KEY.js
+4. Paste it between the quotes:
+   var DOOFINDER_STORE_ID = "76670189-511f-4a57-b019-73834825ff75";
 
-   So the line should look like:
-   var DOOFINDER_SCRIPT_URL = "https://eu1-config.doofinder.com/2.x/YOUR-KEY.js";
-
-4. Save the file and refresh your browser.
+5. Save the file and refresh your browser.
    The script now loads automatically on every page.
 
 ----------------------------------------------------------------
@@ -76,13 +76,13 @@ price, category, image, availability, color, size and gender.
 STORE STRUCTURE
 ----------------------------------------------------------------
 
-maison-store/
+maison-store-main/
 ├── START_STORE_MAC.sh      ← Mac: double-click to launch
 ├── START_STORE.sh          ← Linux: double-click to launch
 ├── DOOFINDER_FEED.csv      ← Upload to Doofinder admin
 ├── README.txt              ← This file
 ├── js/
-│   ├── doofinder.js        ← Paste your Doofinder URL here
+│   ├── doofinder.js        ← Paste your Doofinder Store ID here
 │   └── store.js            ← All 798 products
 ├── index.html              ← Homepage
 ├── category/
@@ -102,13 +102,19 @@ TROUBLESHOOTING
   → Open your browser manually and go to http://localhost:8080
 
 "Port already in use" error
-  → Run this in Terminal: kill $(lsof -t -i:8080)
+  → Mac: run this in Terminal: kill $(lsof -t -i:8080)
+  → Linux: run this in Terminal: fuser -k 8080/tcp
   → Then double-click the launcher again
 
 "Doofinder script not loading"
-  → Make sure you pasted ONLY the URL (no <script> tags)
-  → Make sure you saved the file after editing
-  → Hard refresh the browser: Cmd+Shift+R (Mac) or Ctrl+Shift+R (Linux)
+  → Make sure you pasted ONLY the Store ID (not the full URL)
+  → Make sure you saved doofinder.js after editing
+  → Hard refresh: Cmd+Shift+R (Mac) or Ctrl+Shift+R (Linux)
+
+"Store doesn't load / localhost not working"
+  → Check the folder for an Output subfolder and delete it
+  → Do NOT launch the store from a VS Code terminal
+  → Close VS Code completely and double-click the launcher directly
 
 ----------------------------------------------------------------
   Questions? Contact your Doofinder technical team.
