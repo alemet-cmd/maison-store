@@ -57,8 +57,18 @@ HOW TO INJECT YOUR DOOFINDER SCRIPT
 4. Paste it between the quotes:
    var DOOFINDER_STORE_ID = "76670189-511f-4a57-b019-73834825ff75";
 
-5. Save the file and refresh your browser.
-   The script now loads automatically on every page.
+5. Save the file.
+
+6. In your Doofinder Admin Panel, configure the search input selector:
+   Go to your Search Engine → Layer Settings → Configure your Layer
+   Set the CSS Selector to: input.search
+
+7. Add localhost to your authorized domains:
+   Go to Configuration → General Settings → Security
+   Add "localhost" to the allowed domains list and save.
+
+8. Hard refresh your browser: Cmd+Shift+R (Mac) or Ctrl+Shift+R (Linux)
+   Doofinder is now active on every page of the store.
 
 ----------------------------------------------------------------
 HOW TO UPLOAD THE PRODUCT FEED TO DOOFINDER
